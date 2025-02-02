@@ -39,10 +39,36 @@ Triggers: Git push to main branch or manual Jenkins trigger
 
 ![ec2](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/ec2-instance.png)
 
-- Created SSH key integration between Jenkins and EC2
-- Extended existing CI pipeline from [Jenkins Multi-pipeline project](https://github.com/Princeton45/jenkins-multi-pipeline) with automated deployment capabilities
+- Installed `SSH Agent` plugin on Jenkins & setup SSH key integration between Jenkins and EC2
 
-- Configured EC2 security groups for web application access
+![ssh-agent](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/ssh-agent.png)
+
+- Added my ec2 instance ssh private key as a credential in Jenkins
+
+![key](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/key.png)
+
+
+
+- Extended existing CI Jenkins pipeline from [Jenkins Multi-pipeline project](https://github.com/Princeton45/jenkins-multi-pipeline) to connect to EC2 and run Docker command.
+
+```groovy
+stage("deploy") {
+            steps {
+                script {
+                    def dockerCmd = "docker run -p 3080:3080 -d prince450/demo-app:1.0node"
+                    sshagent(['ec2-server-key']) {
+                      sh "ssh -o StrictHostKeyChecking=no ec2-user@35.174.114.33 ${dockerCmd}"
+                    }
+                }
+```
+
+
+- Edited EC2 Security Group to give Jenkins permission to access the EC2
+
+![jenkins-ip](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/jenkins-ip2.png)
+
+`67.205.164.34` is the IP of the Jenkins server
+
 
 ![Jenkins Pipeline Stage 1](suggested_image: Screenshot of Jenkins pipeline showing successful deployment stage)
 
