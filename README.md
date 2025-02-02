@@ -18,7 +18,7 @@ The pipeline automates the entire process from code commit to deployment:
 - Deploys application via Docker Compose on EC2
 - Updates version control and verifies deployment
 
-![diagram](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/ignore.png)
+![diagram](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/diagram.png)
 
 Triggers: Git push to main branch or manual Jenkins trigger
 
