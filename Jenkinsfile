@@ -1,20 +1,29 @@
 #!/usr/bin.env groovy
 
-pipeline {   
+pipeline {
     agent any
+    tools {
+        maven 'maven-3.9'
+    }
+    environment {
+        IMAGE_NAME = "prince450/demo-app:java-maven-1.0"
+    }
     stages {
-        stage("test") {
+        stage('build app') {
             steps {
-                script {
-                    echo "Testing the application..."
-
-                }
+                echo 'building application jar...'
+                sh 'mvn package'
             }
         }
-        stage("build") {
+        stage('build image') {
             steps {
                 script {
-                    echo "Building the application..."
+                    echo "building the docker image..."
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "docker build -t ${IMAGE_NAME} ."
+                        sh 'echo $PASS | docker login -u $USER --password-stdin'
+                        sh "docker push ${IMAGE_NAME}"
+                    }
                 }
             }
         }
@@ -22,12 +31,12 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    def dockerCmd = "docker run -p 3080:3080 -d prince450/demo-app:1.0node"
+                    def dockerCmd = "docker run -p 8080:8080 -d ${IMAGE_NAME}"
                     sshagent(['ec2-server-key']) {
-                      sh "ssh -o StrictHostKeyChecking=no ec2-user@35.174.114.33 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@35.174.114.33 ${dockerCmd}"
                     }
                 }
             }
         }               
     }
-} 
+}

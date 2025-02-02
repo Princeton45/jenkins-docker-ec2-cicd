@@ -55,11 +55,12 @@ Triggers: Git push to main branch or manual Jenkins trigger
 stage("deploy") {
             steps {
                 script {
-                    def dockerCmd = "docker run -p 3080:3080 -d prince450/demo-app:1.0node"
+                    def dockerCmd = "docker run -p 3080:3080 -d ${IMAGE_NAME}"
                     sshagent(['ec2-server-key']) {
-                      sh "ssh -o StrictHostKeyChecking=no ec2-user@35.174.114.33 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@35.174.114.33 ${dockerCmd}"
                     }
                 }
+            }
 ```
 
 
