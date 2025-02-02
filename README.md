@@ -1,4 +1,4 @@
-# CI/CD Pipeline with Jenkins, Docker, and AWS EC2
+# Complete CI/CD Pipeline with Jenkins, Docker, and AWS EC2
 
 ## Project Overview
 I created a comprehensive CI/CD pipeline that demonstrates the deployment strategies using Jenkins, Docker, and AWS EC2. The project is divided into three progressive stages, each building upon the previous one.
@@ -18,7 +18,7 @@ The pipeline automates the entire process from code commit to deployment:
 - Deploys application via Docker Compose on EC2
 - Updates version control and verifies deployment
 
-![Pipeline Flow](suggested_image: Include a single flowchart showing: Code Push → Jenkins (Build/Test) → Docker Hub → EC2 Deployment)
+![diagram](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/ignore.png)
 
 Triggers: Git push to main branch or manual Jenkins trigger
 

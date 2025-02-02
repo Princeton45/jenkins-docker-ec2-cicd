@@ -1,0 +1,18 @@
+graph TB
+    Dev((Developer))-->|Push| Git[GitHub]
+    Git-->|Webhook| J[Jenkins]
+    J-->V[Version Update]
+    V-->B[Maven Build]
+    B-->T[Tests]
+    T-->D[Docker Build]
+    D-->DH[(Docker Hub)]
+    DH-->|Pull| EC2[AWS EC2]
+    J-->|SSH| EC2
+    EC2-->|Docker Compose| App[Application]
+
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef storage fill:#ffd700,stroke:#d4af37;
+    classDef deploy fill:#98fb98,stroke:#228b22;
+    
+    class Git,DH storage
+    class EC2,App deploy
