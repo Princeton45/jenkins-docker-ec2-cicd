@@ -70,8 +70,10 @@ stage("deploy") {
 
 `67.205.164.34` is the IP of the Jenkins server
 
+Successful pipeline run:
 
-![Jenkins Pipeline Stage 1](suggested_image: Screenshot of Jenkins pipeline showing successful deployment stage)
+![success](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/success.png)
+
 
 ## Part 2: Docker Compose Implementation
 
