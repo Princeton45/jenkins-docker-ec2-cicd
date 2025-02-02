@@ -34,8 +34,8 @@ pipeline {
                     echo "deploying docker image to EC2"
                     def dockerComposeCmd = "docker-compose -f docker-compose.yaml up --detached"
                     sshagent(['ec2-server-key']) {
-                        sh "ssh-keygen -f "/var/jenkins_home/.ssh/known_hosts" -R "54.234.189.5""
-                        sh "ssh-keyscan -H 54.234.189.5 >> /var/jenkins_home/.ssh/known_hosts"
+                        sh 'ssh-keygen -f "/var/jenkins_home/.ssh/known_hosts" -R "54.234.189.5"'
+                        sh 'ssh-keyscan -H 54.234.189.5 >> /var/jenkins_home/.ssh/known_hosts'
                         sh "scp docker-compose.yaml ec2-user@54.234.189.5:/home/ec2-user"
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.234.189.5 ${dockerComposeCmd}"
                     }
