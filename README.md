@@ -92,12 +92,50 @@ Then change the permissions for the docker-compose bin
 
 - Created a docker-compose.yml for streamlined deployment
 
-<add final docker-compose.yml file>
-- Optimized Jenkins pipeline with Docker Compose integration
+```yaml
+FROM amazoncorretto:8-alpine3.17-jre
 
-<add new code of deploy stage from Jenkinsfile here>
+EXPOSE 8080
+
+COPY ./target/java-maven-app-*.jar /usr/app/
+WORKDIR /usr/app
+
+ENTRYPOINT java -jar $(ls java-maven-app-*.jar)
+```
+
+- Optimized Deploy step in Jenkins pipeline with Docker Compose integration
+
+```groovy
+ stage("deploy") {
+            steps {
+                script {
+                    echo "deploying docker image to EC2"
+                    def shellCmd = "IMAGE_NAME=${IMAGE_NAME} bash ./server-cmds.sh"
+                    def ec2Instance = "ec2-user@54.234.189.5"
+                    sshagent(['ec2-server-key']) {
+                        sh "scp server-cmds.sh ${ec2Instance}:/home/ec2-user"
+                        sh "scp docker-compose.yaml ${ec2Instance}:/home/ec2-user"
+                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} ${shellCmd}"
+                    }
+                }
+            }
+```
 
 - Implemented shell script optimization for remote server commands
+
+This is so that we can pass in additional commands needed before starting up the containers in the `docker-compose` file (things like changing permissions in directories, creating directories, network commands, etc).
+
+In this case, I just exported the `$IMAGE_NAME` so the docker-compose.yaml is aware of the variable, ran the docker-compose command and ran an echo success message.
+
+`server-cmds.sh`
+
+```bash
+#!/usr/bin/env bash
+
+export IMAGE_NAME=$1
+docker-compose -f docker-compose.yaml up -d
+echo "success"
+```
 
 ## Part 3: Advanced CI/CD Pipeline with Dynamic Versioning
 
