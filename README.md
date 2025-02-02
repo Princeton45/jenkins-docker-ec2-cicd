@@ -83,8 +83,6 @@ Successful pipeline run:
 - Optimized Jenkins pipeline with Docker Compose integration
 - Implemented shell script optimization for remote server commands
 
-![Docker Compose Configuration](suggested_image: Screenshot of docker-compose.yml and directory structure)
-
 ## Part 3: Advanced CI/CD Pipeline with Dynamic Versioning
 
 ### What I Accomplished
@@ -94,42 +92,3 @@ Successful pipeline run:
 - Created version control system for deployment tracking
 - Automated version update commits
 
-![Complete Pipeline Overview](suggested_image: Screenshot of final Jenkins pipeline with all stages)
-
-## Key Features
-- Automated deployment process
-- Scalable Docker container management
-- Version control integration
-- Secure AWS infrastructure
-- Optimized build and deployment scripts
-
-## Infrastructure Setup
-- AWS EC2 t2.micro instance running Amazon Linux 2
-- Jenkins server with necessary plugins
-- Docker Hub repository for image storage
-- GitHub repository for version control
-
-![Infrastructure Diagram](suggested_image: Simple diagram showing the infrastructure components)
-
-## Results and Metrics
-- Deployment time reduced from manual processes to under 5 minutes
-- Zero-downtime deployments
-- Automated version management
-- Scalable container architecture
-
-## Lessons Learned
-- Importance of script optimization
-- Benefits of Docker Compose in deployment
-- Value of automated version control
-- Security considerations in CI/CD pipelines
-
-## Future Improvements
-- Kubernetes integration
-- Blue-Green deployment strategy
-- Enhanced monitoring and logging
-- Automated rollback capabilities
-
-## Contact
-Feel free to connect with me for any questions or suggestions!
-
-[Your Contact Information]
