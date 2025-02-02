@@ -79,8 +79,24 @@ Successful pipeline run:
 
 ### What I Accomplished
 - Enhanced EC2 instance with Docker Compose functionality
+
+- Installed Docker Compose on the EC2 instance
+
+```bash
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+```
+
+Then change the permissions for the docker-compose bin
+
+`sudo chmod +x /usr/local/bin/docker-compose`
+
 - Created a docker-compose.yml for streamlined deployment
+
+<add final docker-compose.yml file>
 - Optimized Jenkins pipeline with Docker Compose integration
+
+<add new code of deploy stage from Jenkinsfile here>
+
 - Implemented shell script optimization for remote server commands
 
 ## Part 3: Advanced CI/CD Pipeline with Dynamic Versioning
