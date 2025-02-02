@@ -35,7 +35,10 @@ Triggers: Git push to main branch or manual Jenkins trigger
 ## Part 1: Basic Docker Deployment Pipeline
 
 ### What I Accomplished
-- Set up an EC2 instance with Docker installation
+- I set up an EC2 instance with Docker installed
+
+![ec2](https://github.com/Princeton45/jenkins-docker-ec2-cicd/blob/main/images/ec2-instance.png)
+
 - Created SSH key integration between Jenkins and EC2
 - Extended existing CI pipeline from [Jenkins Multi-pipeline project](https://github.com/Princeton45/jenkins-multi-pipeline) with automated deployment capabilities
 
