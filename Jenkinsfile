@@ -54,7 +54,6 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        // Add git config commands to avoid errors
                         sh 'git config --global user.email "jenkins@example.com"'
                         sh 'git config --global user.name "jenkins"'
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/Princeton45/jenkins-docker-ec2-cicd.git"
