@@ -1,4 +1,4 @@
-#!/usr/bin.env groovy
+#!/usr/bin/env groovy
 
 pipeline {
     agent any
@@ -15,7 +15,7 @@ pipeline {
                         versions:commit'
                     def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
                     def version = matcher[0][1]
-                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    env.IMAGE_NAME = "prince450/java-maven-app:${version}-${BUILD_NUMBER}"
                 }
             }
         }
@@ -57,6 +57,9 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        // Add git config commands to avoid errors
+                        sh 'git config --global user.email "jenkins@example.com"'
+                        sh 'git config --global user.name "jenkins"'
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/Princeton45/jenkins-docker-ec2-cicd.git"
                         sh "git add ."
                         sh 'git commit -m "ci: version bump"'
