@@ -1,6 +1,6 @@
 services:
   java-maven-app:
-    image: "${IMAGE_NAME}"
+    image: "prince450/demo-app:${TAG}"
     ports:
       - 8080:8080
 
